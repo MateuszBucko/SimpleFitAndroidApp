@@ -4,5 +4,14 @@
     <string name="loginlabel">Login</string>
     <string name="usernameLabel">Username</string>
     <string name="passwordLabel">Password</string>
-    <string name="helloLabel">Hello</string>
+    <string name="helloLabel">Hello  </string>
+    <string name="startWeightLabel">Your start weight:  </string>
+    <string name="startBMI">Your start BMI:  </string>
+    <string name="actualWeightLabel">Your actual weight:  </string>
+    <string name="actualBMI">Your actual BMI:  </string>
+    <string name="differenceWeight">Difference weight:  </string>
+    <string name="differenceBMI">Difference BMI: </string>
+    <string name="menuSettings">Settings</string>
+    <string name="toList">TO LIST</string>
+    <string name="logout">LOGOUT</string>
 </resources>

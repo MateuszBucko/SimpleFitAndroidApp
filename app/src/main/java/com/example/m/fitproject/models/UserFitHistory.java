@@ -23,7 +23,7 @@ public class UserFitHistory extends Model {
     @Column(name = "Photo")
     private String photo;
     @Column(name = "Date")
-    private Date date;
+    private Date date = new Date();
 
     @Column(name = "user")
     private User user;
