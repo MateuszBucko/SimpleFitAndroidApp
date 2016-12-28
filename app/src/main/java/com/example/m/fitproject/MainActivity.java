@@ -4,9 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.m.fitproject.models.User;
+import com.example.m.fitproject.models.UserFitHistory;
 import com.example.m.fitproject.session.SessionManager;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,5 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("USERNAME", userDetails.get(SessionManager.KEY_USERNAME));
         Log.d("ID", userDetails.get(SessionManager.KEY_ID));
+
+        User u = User.getUser(Long.parseLong(userDetails.get(SessionManager.KEY_ID)));
+        Log.d("USERNAME",u.getPassword());
+
+
     }
 }

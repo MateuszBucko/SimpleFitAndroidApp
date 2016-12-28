@@ -10,9 +10,11 @@ import android.widget.EditText;
 
 import com.activeandroid.ActiveAndroid;
 import com.example.m.fitproject.models.User;
+import com.example.m.fitproject.models.UserFitHistory;
 import com.example.m.fitproject.session.AlertDialogManager;
 import com.example.m.fitproject.session.SessionManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,6 +37,13 @@ public class LoginActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
 
 
+//        User u = new User("Username1","Password1",50,50);
+//        u.save();
+//        UserFitHistory userFitHistory = new UserFitHistory();
+//        userFitHistory.setUser(u);
+//        userFitHistory.setBmi(0.0);
+//        userFitHistory.save();
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,11 +59,11 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password doesn't exist in database", false);
+                        alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password doesn't exist in database");
                     }
                 } else {
                     Log.d("ELSE","Poszlo");
-                    alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password cannot be empty", false);
+                    alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password cannot be empty");
                 }
             }
         });
