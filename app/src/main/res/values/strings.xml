@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FitProject</string>
+    <string name="registerLabel">Registration</string>
+    <string name="loginlabel">Login</string>
+    <string name="usernameLabel">Username</string>
+    <string name="passwordLabel">Password</string>
+</resources>
