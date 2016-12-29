@@ -49,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     startActivity(i);
 
+
+
                                 } else {
                                     alert.showAlertDialog(RegisterActivity.this, "Creating account failed", "Wrong format of height value !");
                                 }

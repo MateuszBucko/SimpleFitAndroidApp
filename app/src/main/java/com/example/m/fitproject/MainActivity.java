@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.m.fitproject.adapters.HistoryItemAdapter;
 import com.example.m.fitproject.models.User;
 import com.example.m.fitproject.models.UserFitHistory;
 import com.example.m.fitproject.session.SessionManager;
@@ -91,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout:
                 sessionManager.logoutUser();
                 break;
+            case R.id.list:
+                Intent listIntent = new Intent(this, HistoryItemsListActivity.class);
+                startActivity(listIntent);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

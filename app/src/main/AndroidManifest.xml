@@ -29,7 +29,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HistoryItemsListActivity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".HistoryDetailsActivity"></activity>
     </application>
 
 </manifest>

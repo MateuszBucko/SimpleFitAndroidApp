@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
 
 
-//        User u = new User("a","a",100,180);
+//        User u = new User("z","z",100,180);
 //        u.save();
 //        u.save();
 //        UserFitHistory f1 = new UserFitHistory();
@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
                         alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password doesn't exist in database");
                     }
                 } else {
-                    Log.d("ELSE","Poszlo");
                     alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password cannot be empty");
                 }
             }

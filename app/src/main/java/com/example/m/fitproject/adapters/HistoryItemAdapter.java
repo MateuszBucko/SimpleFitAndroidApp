@@ -5,9 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.m.fitproject.R;
 import com.example.m.fitproject.models.UserFitHistory;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -42,6 +46,18 @@ public class HistoryItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View rowView = inflater.inflate(R.layout.history_row,parent,false);
+
+        TextView nameTextView = (TextView) rowView.findViewById(R.id.itemTitle);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.itemImage);
+
+        UserFitHistory userFitHistory = (UserFitHistory) getItem(position);
+
+        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(userFitHistory.getDate());
+
+
+        nameTextView.setText(date);
+
+        return rowView;
     }
 }
