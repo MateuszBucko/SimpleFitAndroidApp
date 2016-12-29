@@ -30,7 +30,8 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HistoryItemsListActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".HistoryDetailsActivity"></activity>
+        <activity android:name=".HistoryDetailsActivity" />
+        <activity android:name=".AddNewHistoryItemActivity"></activity>
     </application>
 
 </manifest>
