@@ -9,14 +9,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.m.fitproject.LoginActivity"
+    tools:context="com.example.m.fitproject.SettingsActivity"
     android:weightSum="1">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60px"
         android:textSize="20dp"
-        android:text="@string/loginlabel"
+        android:text="@string/changePasswordLabel"
         android:textAlignment="center"
         android:layout_marginBottom="40px"
         android:layout_weight="0.03" />
@@ -25,12 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:inputType="textPersonName"
-        android:hint="@string/usernameLabel"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="@string/oldPasswordLabel"
         android:gravity="center"
         android:ellipsize="start"
-        android:ems="10"
-        android:id="@+id/usernameRegisterText"
+        android:id="@+id/oldPasswordText"
         android:layout_marginBottom="20px"/>
 
     <EditText
@@ -38,17 +38,43 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:inputType="textPassword"
-        android:hint="@string/passwordLabel"
-        android:ems="10"
         android:gravity="center"
         android:ellipsize="start"
-        android:id="@+id/passwordRegisterText"
+        android:hint="@string/newPasswordLabel"
+        android:ems="10"
+        android:id="@+id/newPasswordText"
+        android:layout_marginBottom="20px"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:ellipsize="start"
+        android:hint="@string/repeatNewPasswordLabel"
+        android:ems="10"
+        android:id="@+id/repeatNewPasswordText"
         android:layout_marginBottom="20px"/>
 
     <Button
-        android:text="@string/loginlabel"
+        android:text="@string/changePasswordLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loginButton" />
+        android:id="@+id/changeButton"
+        android:layout_marginBottom="30px"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:textSize="20dp"
+        android:textColor="@color/colorAccent"
+        android:visibility="invisible"
+        android:text="@string/passwordChanged"
+        android:textAlignment="center"
+        android:layout_marginBottom="40px"
+        android:layout_weight="0.03"
+        android:id="@+id/passwordChangedText"/>
+
 
 </LinearLayout>

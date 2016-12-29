@@ -14,4 +14,9 @@
     <string name="menuSettings">Settings</string>
     <string name="toList">TO LIST</string>
     <string name="logout">LOGOUT</string>
+    <string name="oldPasswordLabel">Actual password</string>
+    <string name="newPasswordLabel">New password</string>
+    <string name="repeatNewPasswordLabel">Repeat new password</string>
+    <string name="changePasswordLabel">Change Password</string>
+    <string name="passwordChanged">Password Changed !</string>
 </resources>

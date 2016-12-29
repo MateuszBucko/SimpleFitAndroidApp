@@ -1,5 +1,6 @@
 package com.example.m.fitproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.settings:
+                Intent intent = new Intent(this,SettingsActivity.class);
+                startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -81,7 +81,6 @@ public class User extends Model {
                 .orderBy("RANDOM()")
                 .executeSingle();
     }
-
     public static User getUser(Long id) {
         return new Select()
                 .from(User.class)
@@ -97,10 +96,12 @@ public class User extends Model {
         List<UserFitHistory> userFitHistories = getUserFitHistory();
         UserFitHistory finalhistory = null;
         if (userFitHistories != null) {
-            finalhistory = userFitHistories.get(0);
-            for (UserFitHistory ufh : userFitHistories) {
-                if(ufh.getDate().after(finalhistory.getDate())){
-                    finalhistory = ufh;
+            if(userFitHistories.size()>0) {
+                finalhistory = userFitHistories.get(0);
+                for (UserFitHistory ufh : userFitHistories) {
+                    if (ufh.getDate().after(finalhistory.getDate())) {
+                        finalhistory = ufh;
+                    }
                 }
             }
         }

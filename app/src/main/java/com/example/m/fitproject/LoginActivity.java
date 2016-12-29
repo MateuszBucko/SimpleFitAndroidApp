@@ -37,7 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         ActiveAndroid.initialize(this);
 
 
-//        User u = new User("Username","Password",100,180);
+//        User u = new User("a","a",100,180);
+//        u.save();
 //        u.save();
 //        UserFitHistory f1 = new UserFitHistory();
 //        f1.setUser(u);
