@@ -20,7 +20,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwordText;
-    private Button loginButton;
+    private Button loginButton, registerButton;
 
     SessionManager sessionManager;
 
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameText = (EditText) findViewById(R.id.usernameRegisterText);
         passwordText = (EditText) findViewById(R.id.passwordRegisterText);
         loginButton = (Button) findViewById(R.id.loginButton);
+        registerButton = (Button) findViewById(R.id.registerButton);
         sessionManager = new SessionManager(getApplicationContext());
         ActiveAndroid.initialize(this);
 
@@ -71,6 +72,18 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("ELSE","Poszlo");
                     alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username and Password cannot be empty");
                 }
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(i);
             }
         });
 

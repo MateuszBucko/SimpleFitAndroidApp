@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 Intent intent = new Intent(this,SettingsActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.logout:
+                sessionManager.logoutUser();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

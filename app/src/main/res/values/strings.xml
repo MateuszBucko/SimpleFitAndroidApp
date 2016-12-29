@@ -19,4 +19,9 @@
     <string name="repeatNewPasswordLabel">Repeat new password</string>
     <string name="changePasswordLabel">Change Password</string>
     <string name="passwordChanged">Password Changed !</string>
+    <string name="createAccount">Create new account</string>
+    <string name="yourWeight">Your weight</string>
+    <string name="yourHeight">Your height</string>
+    <string name="repeatPassword">Repeat password</string>
+    <string name="create">Create account</string>
 </resources>

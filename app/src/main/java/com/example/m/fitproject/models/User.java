@@ -81,6 +81,13 @@ public class User extends Model {
                 .orderBy("RANDOM()")
                 .executeSingle();
     }
+    public static User getUser(String username) {
+        return new Select()
+                .from(User.class)
+                .where("Username = ?", username)
+                .orderBy("RANDOM()")
+                .executeSingle();
+    }
     public static User getUser(Long id) {
         return new Select()
                 .from(User.class)
