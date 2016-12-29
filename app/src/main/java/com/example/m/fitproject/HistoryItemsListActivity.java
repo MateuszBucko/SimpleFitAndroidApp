@@ -14,6 +14,7 @@ import com.example.m.fitproject.models.UserFitHistory;
 import com.example.m.fitproject.session.SessionManager;
 
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,6 +50,15 @@ public class HistoryItemsListActivity extends AppCompatActivity {
                 UserFitHistory selectedHistory = userFitHistory.get(position);
 
                 Intent detailIntent = new Intent(getApplicationContext(),HistoryDetailsActivity.class);
+                Integer startHeight = selectedHistory.getUser().getHeight();
+                detailIntent.putExtra("startHeight",startHeight.toString());
+                Integer startWeight = selectedHistory.getUser().getStartWeight();
+                detailIntent.putExtra("startWeight",startWeight.toString());
+                Integer actualWeight = selectedHistory.getWeight();
+                detailIntent.putExtra("actualWeight",actualWeight.toString());
+                String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(selectedHistory.getDate());
+                detailIntent.putExtra("date",date);
+                detailIntent.putExtra("photo",selectedHistory.getPhoto());
                 detailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(detailIntent);
 

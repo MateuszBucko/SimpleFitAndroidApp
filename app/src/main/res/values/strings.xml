@@ -24,4 +24,7 @@
     <string name="yourHeight">Your height</string>
     <string name="repeatPassword">Repeat password</string>
     <string name="create">Create account</string>
+    <string name="weight">Weight: </string>
+    <string name="bmi">BMI: </string>
+    <string name="date">Date: </string>
 </resources>

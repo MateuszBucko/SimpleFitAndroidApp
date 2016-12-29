@@ -91,7 +91,6 @@ public class RegisterActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             return false;
         }
-        // only got here if we didn't return false
         return true;
     }
 }
