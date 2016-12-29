@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import com.example.m.fitproject.models.User;
 import com.example.m.fitproject.models.UserFitHistory;
 import com.example.m.fitproject.session.SessionManager;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -34,31 +36,39 @@ public class MainActivity extends AppCompatActivity {
         actualUser = User.getUser(Long.parseLong(userDetails.get(SessionManager.KEY_ID)));
 
 
-
         helloText.setText(helloText.getText() + "  " + actualUser.getUsername() + " !");
 
         startWeightText.setText(startWeightText.getText() + " " + actualUser.getStartWeight());
 
-        double mHeight = actualUser.getHeight()/100.0;
+        double mHeight = actualUser.getHeight() / 100.0;
 
         double startBmi = actualUser.getStartWeight() / Math.pow(mHeight, 2);
-        startBMIText.setText(startBMIText.getText() + " " + doublePrecision(startBmi));
+        startBmi = doublePrecision(startBmi);
+        startBMIText.setText(startBMIText.getText() + " " + startBmi);
 
         UserFitHistory lastestHistory = actualUser.getLastestRecord();
+        Integer differenceWeight = 0;
         if (lastestHistory != null) {
             actualWeightText.setText(actualWeightText.getText() + " " + lastestHistory.getWeight());
+            differenceWeight = actualUser.getStartWeight() - lastestHistory.getWeight();
         } else {
             actualWeightText.setText(actualWeightText.getText() + " " + actualUser.getStartWeight());
+            differenceWeight = 0;
         }
-
-        if(lastestHistory != null){
-            double actualBMI = lastestHistory.getWeight() / Math.pow(mHeight, 2);
+        double actualBMI = 0;
+        if (lastestHistory != null) {
+            actualBMI = lastestHistory.getWeight() / Math.pow(mHeight, 2);
+            actualBMI = doublePrecision(actualBMI);
             actualBMIText.setText(actualBMIText.getText() + " " + doublePrecision(actualBMI));
-        }
-        else
-        {
+        } else {
+            actualBMI = startBmi;
             actualBMIText.setText(actualBMIText.getText() + " " + doublePrecision(startBmi));
         }
+
+        differenceWeightText.setText(differenceWeightText.getText().toString() + "  " + differenceWeight.toString());
+        Double bmiDifference = startBmi - actualBMI;
+
+        differenceBMIText.setText(differenceBMIText.getText().toString() + "  " + bmiDifference.toString());
 
 
     }
@@ -66,16 +76,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.settings:
-                Intent intent = new Intent(this,SettingsActivity.class);
+                Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.logout:
@@ -95,11 +105,10 @@ public class MainActivity extends AppCompatActivity {
         differenceBMIText = (TextView) findViewById(R.id.differenceBMIText);
     }
 
-    private double doublePrecision(double d)
-    {
+    private double doublePrecision(double d) {
         Double truncatedDouble = BigDecimal.valueOf(d)
-            .setScale(2, RoundingMode.HALF_UP)
-            .doubleValue();
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
 
         return truncatedDouble;
     }
