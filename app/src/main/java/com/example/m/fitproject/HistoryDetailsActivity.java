@@ -30,6 +30,15 @@ public class HistoryDetailsActivity extends AppCompatActivity {
         double startBMI = doublePrecision(startWeightDouble / Math.pow(startHeightDouble, 2));
         double actualBMI = doublePrecision(actualWeightDouble / Math.pow(startHeightDouble,2));
 
+        BMIText.setText(BMIText.getText() + " " + actualBMI);
+
+        Double weightDifference = startWeightDouble - actualWeightDouble;
+        Double bmiDifference = doublePrecision(startBMI - actualBMI);
+
+
+        weightDifferenceText.setText(weightDifferenceText.getText() + " " + weightDifference.toString());
+        BMIDifferenceText.setText(BMIDifferenceText.getText()+ " " + bmiDifference.toString());
+
 
 
 

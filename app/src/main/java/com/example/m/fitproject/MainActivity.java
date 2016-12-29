@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         differenceWeightText.setText(differenceWeightText.getText().toString() + "  " + differenceWeight.toString());
-        Double bmiDifference = startBmi - actualBMI;
+        Double bmiDifference = doublePrecision(startBmi - actualBMI);
 
         differenceBMIText.setText(differenceBMIText.getText().toString() + "  " + bmiDifference.toString());
 
