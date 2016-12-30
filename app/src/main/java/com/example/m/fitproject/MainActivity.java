@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.logout:
                 sessionManager.logoutUser();
+                finish();
                 break;
             case R.id.list:
                 Intent listIntent = new Intent(this, HistoryItemsListActivity.class);
