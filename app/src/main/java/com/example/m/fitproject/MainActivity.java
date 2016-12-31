@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView helloText, startWeightText, startBMIText, actualWeightText, actualBMIText, differenceWeightText, differenceBMIText;
     private User actualUser;
+    String helloTextBase,startWeightTextBase,startBMITextBase,actualWeightTextBase,actualBMITextBase,differenceWeightTextBase,differenceBMITextBase;
 
     private SessionManager sessionManager;
 
@@ -28,50 +29,59 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initializeFileds();
+        updateFields();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateFields();
+
+    }
+
+
+
+    private void updateFields() {
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> userDetails = sessionManager.getUserDetails();
 
-        initializeFileds();
-
         actualUser = User.getUser(Long.parseLong(userDetails.get(SessionManager.KEY_ID)));
 
+        helloText.setText(helloTextBase + "  " + actualUser.getUsername() + " !");
 
-        helloText.setText(helloText.getText() + "  " + actualUser.getUsername() + " !");
-
-        startWeightText.setText(startWeightText.getText() + " " + actualUser.getStartWeight());
+        startWeightText.setText(startWeightTextBase + " " + actualUser.getStartWeight());
 
         double mHeight = actualUser.getHeight() / 100.0;
 
         double startBmi = actualUser.getStartWeight() / Math.pow(mHeight, 2);
         startBmi = doublePrecision(startBmi);
-        startBMIText.setText(startBMIText.getText() + " " + startBmi);
+        startBMIText.setText(startBMITextBase + " " + startBmi);
 
         UserFitHistory lastestHistory = actualUser.getLastestRecord();
         Integer differenceWeight = 0;
         if (lastestHistory != null) {
-            actualWeightText.setText(actualWeightText.getText() + " " + lastestHistory.getWeight());
+            actualWeightText.setText(actualWeightTextBase + " " + lastestHistory.getWeight());
             differenceWeight = actualUser.getStartWeight() - lastestHistory.getWeight();
         } else {
-            actualWeightText.setText(actualWeightText.getText() + " " + actualUser.getStartWeight());
+            actualWeightText.setText(actualWeightTextBase + " " + actualUser.getStartWeight());
             differenceWeight = 0;
         }
         double actualBMI = 0;
         if (lastestHistory != null) {
             actualBMI = lastestHistory.getWeight() / Math.pow(mHeight, 2);
             actualBMI = doublePrecision(actualBMI);
-            actualBMIText.setText(actualBMIText.getText() + " " + doublePrecision(actualBMI));
+            actualBMIText.setText(actualBMITextBase + " " + doublePrecision(actualBMI));
         } else {
             actualBMI = startBmi;
-            actualBMIText.setText(actualBMIText.getText() + " " + doublePrecision(startBmi));
+            actualBMIText.setText(actualBMITextBase + " " + doublePrecision(startBmi));
         }
 
-        differenceWeightText.setText(differenceWeightText.getText().toString() + "  " + differenceWeight.toString());
+        differenceWeightText.setText(differenceWeightTextBase.toString() + "  " + differenceWeight.toString());
         Double bmiDifference = doublePrecision(startBmi - actualBMI);
 
-        differenceBMIText.setText(differenceBMIText.getText().toString() + "  " + bmiDifference.toString());
-
-
+        differenceBMIText.setText(differenceBMITextBase.toString() + "  " + bmiDifference.toString());
     }
 
     @Override
@@ -110,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
         actualBMIText = (TextView) findViewById(R.id.actualBMIText);
         differenceWeightText = (TextView) findViewById(R.id.differenceWeightText);
         differenceBMIText = (TextView) findViewById(R.id.differenceBMIText);
+
+        helloTextBase = helloText.getText().toString();
+        startWeightTextBase = startWeightText.getText().toString();
+        startBMITextBase = startBMIText.getText().toString();
+        actualWeightTextBase = actualWeightText.getText().toString();
+        actualBMITextBase = actualBMIText.getText().toString();
+        differenceWeightTextBase = differenceWeightText.getText().toString();
+        differenceBMITextBase = differenceBMIText.getText().toString();
     }
 
     private double doublePrecision(double d) {

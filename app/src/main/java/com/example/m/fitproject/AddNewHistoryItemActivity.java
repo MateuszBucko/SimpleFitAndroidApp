@@ -218,6 +218,7 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
                         }
                         userFitHistory.setUser(actualUser);
                         userFitHistory.save();
+                       finish();
                     } else {
                         alert.showAlertDialog(AddNewHistoryItemActivity.this, "Adding new history failed", "Wrong format of weight");
                     }

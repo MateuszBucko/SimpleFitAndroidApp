@@ -33,7 +33,12 @@ public class HistoryItemsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history_item_list);
         //inicjalizacja listView
         listView = (ListView) findViewById(R.id.listView);
+        updateList();
 
+
+    }
+
+    private void updateList() {
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> userDetails = sessionManager.getUserDetails();
 
@@ -42,33 +47,39 @@ public class HistoryItemsListActivity extends AppCompatActivity {
         //lista z historią użytkownika
         userFitHistory = actualUser.getUserFitHistory();
 
-        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(getApplicationContext(),userFitHistory);
+        HistoryItemAdapter historyItemAdapter = new HistoryItemAdapter(getApplicationContext(), userFitHistory);
         listView.setAdapter(historyItemAdapter);
 
-        Log.d("ONCREATE","tak");
+        Log.d("ONCREATE", "tak");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserFitHistory selectedHistory = userFitHistory.get(position);
 
-                Intent detailIntent = new Intent(getApplicationContext(),HistoryDetailsActivity.class);
+                Intent detailIntent = new Intent(getApplicationContext(), HistoryDetailsActivity.class);
                 Integer startHeight = selectedHistory.getUser().getHeight();
-                detailIntent.putExtra("startHeight",startHeight.toString());
+                detailIntent.putExtra("startHeight", startHeight.toString());
                 Integer startWeight = selectedHistory.getUser().getStartWeight();
-                detailIntent.putExtra("startWeight",startWeight.toString());
+                detailIntent.putExtra("startWeight", startWeight.toString());
                 Integer actualWeight = selectedHistory.getWeight();
-                detailIntent.putExtra("actualWeight",actualWeight.toString());
+                detailIntent.putExtra("actualWeight", actualWeight.toString());
                 String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(selectedHistory.getDate());
-                detailIntent.putExtra("date",date);
-                detailIntent.putExtra("photo",selectedHistory.getPhoto());
-                detailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                detailIntent.putExtra("date", date);
+                detailIntent.putExtra("photo", selectedHistory.getPhoto());
+                detailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(detailIntent);
 
             }
         });
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateList();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
