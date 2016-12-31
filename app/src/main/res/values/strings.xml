@@ -27,5 +27,10 @@
     <string name="weight">Weight: </string>
     <string name="bmi">BMI: </string>
     <string name="date">Date: </string>
-    <string name="addNew">Add new</string>
+    <string name="addNew">Add history</string>
+    <string name="createNewHistory">Create new fit history: </string>
+    <string name="actualWeight">Actual weight (kg)</string>
+    <string name="addPhoto">Add photo</string>
+
+
 </resources>
