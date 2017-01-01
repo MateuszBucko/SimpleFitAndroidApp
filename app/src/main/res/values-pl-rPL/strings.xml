@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Projekt fit</string>
+    <string name="registerLabel">Rejestracja</string>
+    <string name="loginlabel">Logowanie</string>
+    <string name="usernameLabel">Użytkownik</string>
+    <string name="passwordLabel">Hasło</string>
+    <string name="helloLabel">Witaj  </string>
+    <string name="startWeightLabel">Twoja startowa waga:  </string>
+    <string name="startBMI">Twoje startowe BMI:  </string>
+    <string name="actualWeightLabel">Twoja aktualna waga:  </string>
+    <string name="actualBMI">Twoje aktualne BMI:  </string>
+    <string name="differenceWeight">Różnica wagi:  </string>
+    <string name="differenceBMI">Różnica BMI: </string>
+    <string name="menuSettings">Ustawienia</string>
+    <string name="toList">DO LISTY</string>
+    <string name="logout">WYLOGUJ</string>
+    <string name="oldPasswordLabel">Aktualne hasło</string>
+    <string name="newPasswordLabel">Nowe hasło</string>
+    <string name="repeatNewPasswordLabel">Powtórz nowe hasło</string>
+    <string name="changePasswordLabel">Zmień hasło</string>
+    <string name="passwordChanged">Hasło zmienione !</string>
+    <string name="createAccount">Załóż nowe konto</string>
+    <string name="yourWeight">Twoja waga</string>
+    <string name="yourHeight">Twój wzrost</string>
+    <string name="repeatPassword">Powtórz hasło</string>
+    <string name="create">Utwórz konto</string>
+    <string name="weight">Waga: </string>
+    <string name="bmi">BMI: </string>
+    <string name="date">Data: </string>
+    <string name="addNew">Dodaj historię</string>
+    <string name="createNewHistory">Dodaj nową historię: </string>
+    <string name="actualWeight">Aktualna waga (kg)</string>
+    <string name="addPhoto">Dodaj zdjęcie</string>
+
+
+</resources>
