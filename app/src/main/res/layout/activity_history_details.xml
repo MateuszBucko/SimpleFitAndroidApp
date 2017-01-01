@@ -16,7 +16,7 @@
     <TextView
         android:id="@+id/dateText"
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="100px"
         android:textSize="20dp"
         android:text="@string/date"
         android:textAlignment="center"
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/wageText"
         android:layout_width="match_parent"
-        android:layout_height="30px"
+        android:layout_height="80px"
         android:textSize="15dp"
         android:text="@string/weight"
         android:textAlignment="center"
@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/BMIText"
         android:layout_width="match_parent"
-        android:layout_height="30px"
+        android:layout_height="80px"
         android:textSize="15dp"
         android:text="@string/bmi"
         android:textAlignment="center"
@@ -43,7 +43,7 @@
     <TextView
         android:id="@+id/weightDifferenceText"
         android:layout_width="match_parent"
-        android:layout_height="30px"
+        android:layout_height="80px"
         android:textSize="15dp"
         android:text="@string/differenceWeight"
         android:textAlignment="center"
@@ -52,7 +52,7 @@
     <TextView
         android:id="@+id/BMIDifferenceText"
         android:layout_width="match_parent"
-        android:layout_height="30px"
+        android:layout_height="80px"
         android:textSize="15dp"
         android:text="@string/differenceBMI"
         android:textAlignment="center"

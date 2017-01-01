@@ -42,7 +42,7 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
     private Button addPhoto, addHistory;
     private Uri imageFileUri;
     private ImageView imageView;
-    String mCurrentPhotoPath;
+    String mCurrentPhotoPath = null;
     private SessionManager sessionManager;
     private User actualUser;
     private AlertDialogManager alert = new AlertDialogManager();
@@ -123,8 +123,6 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
 
     private void openImageInGallery() {
 
-
-        Log.d("CURSOR", mCurrentPhotoPath);
 //        Uri uri =  imageFileUri;
 //        Log.d("CURSOR", imageFileUri.toString());
 //        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
@@ -136,17 +134,18 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
 //                    mimeTypeMap.getFileExtensionFromUrl(uri.toString()));
 //        intent.setDataAndType(uri,mime);
 //        startActivity(intent);
+        if(mCurrentPhotoPath != null) {
+            PackageManager manager = getApplicationContext().getPackageManager();
 
-        PackageManager manager = getApplicationContext().getPackageManager();
-
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse("file://" + mCurrentPhotoPath), "image/*");
-        List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
-        if (infos.size() > 0) {
-            startActivity(intent);
-        } else {
-            alert.showAlertDialog(AddNewHistoryItemActivity.this, "Opening failed", "No program available to open the image");
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse("file://" + mCurrentPhotoPath), "image/*");
+            List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
+            if (infos.size() > 0) {
+                startActivity(intent);
+            } else {
+                alert.showAlertDialog(AddNewHistoryItemActivity.this, "Opening failed", "No program available to open the image");
+            }
         }
 
     }

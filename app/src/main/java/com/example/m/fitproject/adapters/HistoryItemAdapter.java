@@ -1,6 +1,8 @@
 package com.example.m.fitproject.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +56,14 @@ public class HistoryItemAdapter extends BaseAdapter {
         UserFitHistory userFitHistory = (UserFitHistory) getItem(position);
 
         String date = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(userFitHistory.getDate());
+
+        String photo = userFitHistory.getPhoto();
+
+        if(photo != null)
+        {
+            Bitmap bitmap = BitmapFactory.decodeFile(photo, null);
+            imageView.setImageBitmap(bitmap);
+        }
 
 
         nameTextView.setText(date);
