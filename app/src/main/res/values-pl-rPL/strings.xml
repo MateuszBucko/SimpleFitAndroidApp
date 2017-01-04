@@ -31,6 +31,9 @@
     <string name="createNewHistory">Dodaj nową historię: </string>
     <string name="actualWeight">Aktualna waga (kg)</string>
     <string name="addPhoto">Dodaj zdjęcie</string>
+    <string name="lossWeight">Powinieneś/powinnaś schudnąć!</string>
+    <string name="gainWeight">Powinieneś/Powinnaś przytyć!</string>
+    <string name="correctWeight">Twoja waga jest prawidłowa!</string>
 
 
 </resources>

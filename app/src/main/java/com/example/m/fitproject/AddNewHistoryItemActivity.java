@@ -1,12 +1,15 @@
 package com.example.m.fitproject;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -173,8 +176,6 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_history_item);
 
@@ -252,9 +253,9 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
     }
 
     private void getPermission() {
-        String[] permissos = {"android.permission.CAMERA"};
+        String[] permissions = {"android.permission.CAMERA"};
         ActivityCompat.requestPermissions(this,
-                permissos,
+                permissions,
                 0
         );
     }

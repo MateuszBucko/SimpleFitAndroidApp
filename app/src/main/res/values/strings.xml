@@ -31,6 +31,10 @@
     <string name="createNewHistory">Create new fit history: </string>
     <string name="actualWeight">Actual weight (kg)</string>
     <string name="addPhoto">Add photo</string>
+    <string name="lossWeight">You should lose weight!</string>
+    <string name="gainWeight">You should gain weight!</string>
+    <string name="correctWeight">Your weight is correct!</string>
+
 
 
 </resources>

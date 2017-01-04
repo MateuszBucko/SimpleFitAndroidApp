@@ -1,6 +1,8 @@
 package com.example.m.fitproject;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,9 +21,9 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView helloText, startWeightText, startBMIText, actualWeightText, actualBMIText, differenceWeightText, differenceBMIText;
+    private TextView helloText, startWeightText, startBMIText, actualWeightText, actualBMIText, differenceWeightText, differenceBMIText,shouldText;
     private User actualUser;
-    String helloTextBase,startWeightTextBase,startBMITextBase,actualWeightTextBase,actualBMITextBase,differenceWeightTextBase,differenceBMITextBase;
+    private String helloTextBase, startWeightTextBase, startBMITextBase, actualWeightTextBase, actualBMITextBase, differenceWeightTextBase, differenceBMITextBase;
 
     private SessionManager sessionManager;
 
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         updateFields();
 
     }
-
 
 
     private void updateFields() {
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Integer differenceWeight = 0;
         if (lastestHistory != null) {
             actualWeightText.setText(actualWeightTextBase + " " + lastestHistory.getWeight());
-            differenceWeight = actualUser.getStartWeight() - lastestHistory.getWeight();
+            differenceWeight = lastestHistory.getWeight() - actualUser.getStartWeight();
         } else {
             actualWeightText.setText(actualWeightTextBase + " " + actualUser.getStartWeight());
             differenceWeight = 0;
@@ -79,9 +80,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         differenceWeightText.setText(differenceWeightTextBase.toString() + "  " + differenceWeight.toString());
-        Double bmiDifference = doublePrecision(startBmi - actualBMI);
+        Double bmiDifference = doublePrecision(actualBMI - startBmi);
 
         differenceBMIText.setText(differenceBMITextBase.toString() + "  " + bmiDifference.toString());
+
+        if(actualBMI >=18.5 && actualBMI <=24.99){
+            actualBMIText.setTextColor(ColorStateList.valueOf(Color.GREEN));
+            shouldText.setText(getString(R.string.correctWeight));
+        }
+        else actualBMIText.setTextColor(ColorStateList.valueOf(Color.RED));
+
+        if(actualBMI <18.5) shouldText.setText(getString(R.string.gainWeight));
+        if(actualBMI >24.99) shouldText.setText(getString(R.string.lossWeight));
+
     }
 
     @Override
@@ -120,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         actualBMIText = (TextView) findViewById(R.id.actualBMIText);
         differenceWeightText = (TextView) findViewById(R.id.differenceWeightText);
         differenceBMIText = (TextView) findViewById(R.id.differenceBMIText);
+        shouldText = (TextView) findViewById(R.id.shouldText);
 
         helloTextBase = helloText.getText().toString();
         startWeightTextBase = startWeightText.getText().toString();
