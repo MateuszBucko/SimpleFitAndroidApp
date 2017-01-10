@@ -46,8 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                                     startActivity(i);
+                                    finish();
 
 
 

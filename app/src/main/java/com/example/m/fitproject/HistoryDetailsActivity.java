@@ -1,23 +1,31 @@
 package com.example.m.fitproject;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.m.fitproject.session.AlertDialogManager;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+
+import static com.activeandroid.Cache.getContext;
 
 public class HistoryDetailsActivity extends AppCompatActivity {
     private TextView dateText,wageText,BMIText,weightDifferenceText,BMIDifferenceText;
@@ -84,20 +92,28 @@ public class HistoryDetailsActivity extends AppCompatActivity {
 
     private void openImageInGallery(String mCurrentPhotoPath) {
 
+        File pFile = new File(mCurrentPhotoPath);
 
-        Log.d("CURSOR", mCurrentPhotoPath);
-
-        PackageManager manager = getApplicationContext().getPackageManager();
-
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse("file://" + mCurrentPhotoPath), "image/*");
-        List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
-        if (infos.size() > 0) {
-            startActivity(intent);
-        } else {
-            alert.showAlertDialog(HistoryDetailsActivity.this, "Opening failed", "No program available to open the image");
+        if (mCurrentPhotoPath != null) {
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            String ext = pFile.getName().substring(pFile.getName().lastIndexOf(".") + 1);
+            String type = mime.getMimeTypeFromExtension(ext);
+            try {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    Uri contentUri = FileProvider.getUriForFile(getContext(), "com.example.m.fitproject", pFile);
+                    intent.setDataAndType(contentUri, type);
+                } else {
+                    intent.setDataAndType(Uri.fromFile(pFile), type);
+                }
+                startActivityForResult(intent, 0);
+            } catch (ActivityNotFoundException anfe) {
+                Toast.makeText(getContext(), "No activity found to open this attachment.", Toast.LENGTH_LONG).show();
+            }
         }
+
 
     }
 

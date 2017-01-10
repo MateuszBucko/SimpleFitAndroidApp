@@ -2,6 +2,7 @@ package com.example.m.fitproject;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +26,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.m.fitproject.models.User;
 import com.example.m.fitproject.models.UserFitHistory;
@@ -37,6 +40,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.activeandroid.Cache.getContext;
+
 public class AddNewHistoryItemActivity extends AppCompatActivity {
     public static final String FILE_URI_KEY = "FILE_URI_KEY";
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -44,6 +49,7 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
     private EditText actualWeight;
     private Button addPhoto, addHistory;
     private Uri imageFileUri;
+    private File pFile;
     private ImageView imageView;
     String mCurrentPhotoPath = null;
     private SessionManager sessionManager;
@@ -70,6 +76,7 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
                         "com.example.m.fitproject",
                         photoFile);
                 imageFileUri = photoURI;
+                pFile = photoFile;
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
@@ -126,28 +133,23 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
 
     private void openImageInGallery() {
 
-//        Uri uri =  imageFileUri;
-//        Log.d("CURSOR", imageFileUri.toString());
-//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-//        String mime = "*/*";
-//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-//        if (mimeTypeMap.hasExtension(
-//                mimeTypeMap.getFileExtensionFromUrl(uri.toString())))
-//            mime = mimeTypeMap.getMimeTypeFromExtension(
-//                    mimeTypeMap.getFileExtensionFromUrl(uri.toString()));
-//        intent.setDataAndType(uri,mime);
-//        startActivity(intent);
-        if(mCurrentPhotoPath != null) {
-            PackageManager manager = getApplicationContext().getPackageManager();
-
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse("file://" + mCurrentPhotoPath), "image/*");
-            List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
-            if (infos.size() > 0) {
-                startActivity(intent);
-            } else {
-                alert.showAlertDialog(AddNewHistoryItemActivity.this, "Opening failed", "No program available to open the image");
+        if (mCurrentPhotoPath != null) {
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            String ext = pFile.getName().substring(pFile.getName().lastIndexOf(".") + 1);
+            String type = mime.getMimeTypeFromExtension(ext);
+            try {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    Uri contentUri = FileProvider.getUriForFile(getContext(), "com.example.m.fitproject", pFile);
+                    intent.setDataAndType(contentUri, type);
+                } else {
+                    intent.setDataAndType(Uri.fromFile(pFile), type);
+                }
+                startActivityForResult(intent, 0);
+            } catch (ActivityNotFoundException anfe) {
+                Toast.makeText(getContext(), "No activity found to open this attachment.", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -218,7 +220,7 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
                         }
                         userFitHistory.setUser(actualUser);
                         userFitHistory.save();
-                       finish();
+                        finish();
                     } else {
                         alert.showAlertDialog(AddNewHistoryItemActivity.this, "Adding new history failed", "Wrong format of weight");
                     }
@@ -259,7 +261,6 @@ public class AddNewHistoryItemActivity extends AppCompatActivity {
                 0
         );
     }
-
 
 
 }
